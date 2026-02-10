@@ -1,0 +1,22 @@
+site_name: My Auto Docs
+theme:
+  name: material
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [.] # 루트 디렉토리 기준
+          options:
+            docstring_style: google
+  - gen-files:
+      scripts:
+        - docs/gen_ref_pages.py # 위에서 만든 스크립트 실행
+  - literate-nav:
+      nav_file: SUMMARY.md
+
+nav:
+  - Home: index.md
+  - Contributing: CONTRIBUTING.md
+  - Reference: reference/ # 자동으로 생성된 파일들이 여기에 들어갑니다
