@@ -24,6 +24,7 @@ dev = [
     "mkdocstrings[python]>=1.0.3",
     "mypy>=1.19.1",
     "pytest>=8.4.2",
+    "pytest-cov>=7.0.0",
     "ruff>=0.15.0",
 ]
 
@@ -34,16 +35,16 @@ venv = ".venv"
 
 [tool.ruff]
 line-length = 88
-select = ["E", "F", "W", "C90", "B", "I", "D"]
+lint.select = ["E", "F", "W", "C90", "B", "I", "D", "ANN"]
 exclude = ["__init__.py"]
 src = ["."]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]
-"tests/**/*" = ["D"]
+"tests/**/*" = ["D", "S101", "ANN", "PLR2004"]
 
 [tool.mypy]
 python_version = 3.12
@@ -59,8 +60,15 @@ warn_return_any = true
 warn_unreachable = true
 warn_unused_configs = true
 warn_unused_ignores = true
+exclude = ["docs"]
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+warn_return_any = false
 
 [tool.pytest.ini_options]
 minversion = "7.0"
-addopts = "-ra -q"
+addopts = "-ra -q --cov"
 testpaths = ["tests"]
