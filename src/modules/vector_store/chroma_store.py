@@ -16,15 +16,19 @@ class ChromaStore(BaseVectorStore):
     """ChromaDB vector store implementation."""
 
     def __init__(
-        self
+        self,
+        persist_directory: str | None = None,
     ) -> None:
         """Initialize the ChromaDB vector store."""
         self.embeddings = GoogleGenerativeAIEmbeddings(
             model=Settings.google_genai_embedding_model,
         )
 
+        # Allow the persist directory to be configured, while preserving the previous default.
+        self.persist_directory = persist_directory or "./chroma_db"
+
         self.db = Chroma(
-            persist_directory='./chroma_db',
+            persist_directory=self.persist_directory,
             embedding_function=self.embeddings,
             collection_name="ragger_collection"
         )
