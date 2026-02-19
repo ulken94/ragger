@@ -5,11 +5,18 @@
 """
 
 from langchain_chroma import Chroma
+<<<<<<< feature/vector_store
 from langchain_core.documents import Document
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
 from src.configs.settings import Settings
 
+=======
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_core.documents import Document
+
+from src.configs.settings import Settings
+>>>>>>> main
 from .base_store import BaseVectorStore
 
 
@@ -25,12 +32,20 @@ class ChromaStore(BaseVectorStore):
             model=Settings.google_genai_embedding_model,
         )
 
+<<<<<<< feature/vector_store
+=======
+        # Allow the persist directory to be configured, while preserving the previous default.
+>>>>>>> main
         self.persist_directory = persist_directory or "./chroma_db"
 
         self.db = Chroma(
             persist_directory=self.persist_directory,
             embedding_function=self.embeddings,
+<<<<<<< feature/vector_store
             collection_name="ragger_collection",
+=======
+            collection_name="ragger_collection"
+>>>>>>> main
         )
 
     def add_documents(self, documents: list[Document]) -> None:
