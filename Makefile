@@ -13,7 +13,7 @@ test:
 	uv run pytest
 	
 run:
-	uv run python main.py
+	uv run python src/main.py
 
 gdoc:
 	uv run mkdocs serve
