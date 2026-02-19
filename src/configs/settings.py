@@ -16,3 +16,4 @@ class Settings:
 
     google_api_key: str = os.getenv("GOOGLE_API_KEY", "")
     google_genai_embedding_model: str = "models/gemini-embedding-001"
+    llm_model: str = 'models/gemini-2.5-flash'
